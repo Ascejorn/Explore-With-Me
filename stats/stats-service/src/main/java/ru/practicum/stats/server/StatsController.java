@@ -26,18 +26,18 @@ public class StatsController {
     private final StatsService statsService;
 
     @GetMapping("/stats")
-    public ResponseEntity<List<ViewStatsDto>> getViewStats(
+    @ResponseStatus(HttpStatus.OK)
+    public List<ViewStatsDto> getViewStats(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
             @RequestParam(required = false) String[] uris,
             @RequestParam(required = false, defaultValue = "false") Boolean unique) {
-        return new ResponseEntity<>(statsService.getViewStats(start, end, uris, unique), HttpStatus.OK);
+        return statsService.getViewStats(start, end, uris, unique);
     }
 
     @PostMapping("/hit")
-    public ResponseEntity<Void> hit(@RequestBody @Valid EndpointHitDto hitDto)
-            throws ValidationException {
-        statsService.hit(hitDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveHit(@RequestBody @Valid EndpointHitDto hitDto) {
+        statsService.saveHit(hitDto);
     }
 }
