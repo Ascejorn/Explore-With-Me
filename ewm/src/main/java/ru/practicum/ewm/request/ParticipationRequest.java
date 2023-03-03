@@ -30,7 +30,7 @@ public class ParticipationRequest {
     private Long requesterId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "status", length = 50)
+    @Column(nullable = false, name = "status", length = 255)
     private ParticipationRequestStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

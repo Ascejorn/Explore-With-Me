@@ -36,3 +36,4 @@ public class PrivateRequestController {
         return requestService.cancelRequest(userId, requestId);
     }
 }
+

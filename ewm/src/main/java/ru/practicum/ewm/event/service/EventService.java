@@ -10,9 +10,10 @@ import java.util.Collection;
 import java.util.Map;
 
 public interface EventService {
-    EventFullDto addEvent(Long userId, NewEventDto eventDto);
 
     Map<Long, Long> getViews(Collection<Event> events);
+
+    EventFullDto addEvent(Long userId, NewEventDto eventDto);
 
     Collection<EventFullDto> findEvents(Long[] users,
                                         String[] states,
@@ -34,13 +35,11 @@ public interface EventService {
                                          Integer from,
                                          Integer size);
 
-    EventFullDto patchEventByInitiator(Long userId, Long eventId,
-                                       UpdateEventUserRequest updateEventUserRequest);
+    EventFullDto patchEventByInitiator(Long userId, Long eventId, UpdateEventUserRequest updateEventUserRequest);
 
     EventFullDto patchEventByAdmin(Long eventId, UpdateEventAdminRequest updateRequest);
 
-    EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId,
-                                                       EventRequestStatusUpdateRequest statusUpdateRequest);
+    EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest statusUpdateRequest);
 
     EventFullDto findEvent(Long id);
 

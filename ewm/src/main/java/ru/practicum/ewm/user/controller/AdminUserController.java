@@ -38,3 +38,4 @@ public class AdminUserController {
         userService.deleteUser(id);
     }
 }
+

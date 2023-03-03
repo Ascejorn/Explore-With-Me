@@ -16,3 +16,4 @@ public interface CompilationService {
 
     CompilationDto patchCompilation(Long id, NewCompilationDto compilationDto);
 }
+
