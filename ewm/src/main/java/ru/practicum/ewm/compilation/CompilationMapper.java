@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class CompilationMapper {
 
-    public static CompilationDto toCompilationDto (Compilation compilation, Map<Long, Long> eventViews) {
+    public static CompilationDto toCompilationDto(Compilation compilation, Map<Long, Long> eventViews) {
         CompilationDto compilationDto = new CompilationDto();
         compilationDto.setId(compilation.getId());
         compilationDto.setPinned(compilation.getPinned());
