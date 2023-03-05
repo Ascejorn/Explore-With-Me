@@ -8,8 +8,6 @@ import javax.persistence.*;
 @Table(name = "categories", schema = "public")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
@@ -18,6 +16,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "name",length = 255)
+    @Column(nullable = false, name = "name",length = 128)
     private String name;
 }

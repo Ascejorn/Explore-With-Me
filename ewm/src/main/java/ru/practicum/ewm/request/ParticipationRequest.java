@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @Table(name = "requests", schema = "public")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParticipationRequest {
@@ -30,7 +28,7 @@ public class ParticipationRequest {
     private Long requesterId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "status", length = 255)
+    @Column(nullable = false, name = "status", length = 32)
     private ParticipationRequestStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)

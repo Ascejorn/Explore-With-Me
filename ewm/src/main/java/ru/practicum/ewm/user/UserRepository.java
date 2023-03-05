@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     List<User> findByEmailContainingIgnoreCase(String emailSearch);
 
-    List<User> findByIdIn(Long[] ids, Pageable pageable);
+    List<User> findByIdIn(List<Long> ids, Pageable pageable);
 }

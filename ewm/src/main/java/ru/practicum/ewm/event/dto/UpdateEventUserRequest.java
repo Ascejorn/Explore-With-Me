@@ -3,7 +3,6 @@ package ru.practicum.ewm.event.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import ru.practicum.ewm.category.dto.CategoryDto;
 import ru.practicum.ewm.event.Location;
 import ru.practicum.ewm.event.enums.StateUserAction;
 
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 public class UpdateEventUserRequest {
 
     private String annotation;
-    private CategoryDto category;
+    private UpdateEventUserRequest.CategoryDto category;
     private String description;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -26,4 +25,12 @@ public class UpdateEventUserRequest {
     private Boolean requestModeration;
     private StateUserAction stateAction;
     private String title;
+
+    @Setter
+    @Getter
+    public static class CategoryDto {
+
+        private Long id;
+        private String name;
+    }
 }

@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Table(name = "events", schema = "public")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class Event {
@@ -66,10 +64,10 @@ public class Event {
     private Boolean requestModeration;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, name = "state")
+    @Column(nullable = false, name = "state", length = 64)
     private EventState state;
 
-    @Column(nullable = false, name = "title", length = 255)
+    @Column(nullable = false, name = "title", length = 128)
     private String title;
 
     public Collection<ParticipationRequest> getConfirmedRequests() {

@@ -11,8 +11,6 @@ import java.util.Collection;
 @Table(name = "compilations", schema = "public")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class Compilation {
@@ -31,6 +29,6 @@ public class Compilation {
     @Column(nullable = false)
     private Boolean pinned;
 
-    @Column(nullable = false, name = "title", length = 255)
+    @Column(nullable = false, name = "title", length = 128)
     private String title;
 }

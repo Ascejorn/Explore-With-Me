@@ -9,6 +9,7 @@ import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.event.enums.EventSort;
 import ru.practicum.ewm.event.service.EventService;
+import ru.practicum.ewm.util.ControllerLog;
 import ru.practicum.stats.client.StatsClient;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,7 @@ public class PublicEventController {
             @RequestParam(required = false, defaultValue = "10") Integer size,
             HttpServletRequest request) {
         statsClient.hit(request);
+        log.info("{}", ControllerLog.createUrlInfo(request));
         return eventService.findEvents(text, paid, onlyAvailable, sort, categories, rangeStart, rangeEnd, from, size);
     }
 
@@ -48,6 +50,7 @@ public class PublicEventController {
     @ResponseStatus(HttpStatus.OK)
     public EventFullDto findEvent(@PathVariable Long id, HttpServletRequest request) {
         statsClient.hit(request);
+        log.info("{}", ControllerLog.createUrlInfo(request));
         return eventService.findEvent(id);
     }
 }

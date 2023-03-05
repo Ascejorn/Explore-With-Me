@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.UpdateEventAdminRequest;
 import ru.practicum.ewm.event.service.EventService;
+import ru.practicum.ewm.util.ControllerLog;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -31,14 +33,17 @@ public class AdminEventController {
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
             @RequestParam(required = false, defaultValue = "0") Integer from,
-            @RequestParam(required = false, defaultValue = "10") Integer size) {
+            @RequestParam(required = false, defaultValue = "10") Integer size,
+            HttpServletRequest request) {
+        log.info("{}", ControllerLog.createUrlInfo(request));
         return eventService.findEvents(users, states, categories, rangeStart, rangeEnd, from, size);
     }
 
     @PatchMapping("/{eventId}")
     @ResponseStatus(HttpStatus.OK)
     public EventFullDto patchEvent(@PathVariable Long eventId,
-                                   @RequestBody UpdateEventAdminRequest updateRequest) {
+                                   @RequestBody UpdateEventAdminRequest updateRequest, HttpServletRequest request) {
+        log.info("{}", ControllerLog.createUrlInfo(request));
         return eventService.patchEventByAdmin(eventId, updateRequest);
     }
 }

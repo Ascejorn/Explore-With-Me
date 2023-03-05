@@ -1,5 +1,7 @@
 package ru.practicum.ewm.user;
 
+import ru.practicum.ewm.event.dto.EventFullDto;
+import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.user.dto.NewUserRequest;
 import ru.practicum.ewm.user.dto.UserDto;
 import ru.practicum.ewm.user.dto.UserShortDto;
@@ -27,6 +29,20 @@ public class UserMapper {
 
     public static UserShortDto toUserShortDto(User user) {
         UserShortDto userDto = new UserShortDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        return userDto;
+    }
+
+    public static EventFullDto.UserShortDto toUserShortInnerDto(User user) {
+        EventFullDto.UserShortDto userDto = new EventFullDto.UserShortDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        return userDto;
+    }
+
+    public static EventShortDto.UserShortDto toUserEventShortInnerDto(User user) {
+        EventShortDto.UserShortDto userDto = new EventShortDto.UserShortDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         return userDto;

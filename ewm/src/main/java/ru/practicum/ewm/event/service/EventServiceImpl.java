@@ -268,7 +268,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest statusUpdateRequest) {
+    public EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId,
+                                                              EventRequestStatusUpdateRequest statusUpdateRequest) {
         userRepository.findById(userId).orElseThrow(RuntimeException::new);
         Event event = eventRepository.findById(eventId).orElseThrow(RuntimeException::new);
         EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult();
@@ -281,22 +282,21 @@ public class EventServiceImpl implements EventService {
             if (statusUpdateRequest.getStatus() == ParticipationRequestStatusUpdate.CONFIRMED) {
                 if ((event.getParticipantLimit() == 0 || !event.getRequestModeration())
                         && event.getParticipantLimit() > event.getRequests().size()) {
-                    // Подтверждаем заявку
                     request.setStatus(ParticipationRequestStatus.CONFIRMED);
-                    ParticipationRequestDto requestDto = RequestMapper.toRequestDto(requestRepository.save(request));
+                    EventRequestStatusUpdateResult.ParticipationRequestDto requestDto =
+                            RequestMapper.toRequestInnerDto(requestRepository.save(request));
                     result.getConfirmedRequests().add(requestDto);
                 } else if (!event.getRequestModeration() && event.getParticipantLimit() > 0 && event.getParticipantLimit() > event.getConfirmedRequests().size()) {
-                    // Подтверждаем заявку
                     request.setStatus(ParticipationRequestStatus.CONFIRMED);
-                    ParticipationRequestDto requestDto = RequestMapper.toRequestDto(requestRepository.save(request));
+                    EventRequestStatusUpdateResult.ParticipationRequestDto requestDto =
+                            RequestMapper.toRequestInnerDto(requestRepository.save(request));
                     result.getConfirmedRequests().add(requestDto);
                 } else if (event.getConfirmedRequests().size() < event.getParticipantLimit()) {
-                    // Подтверждаем заявку
                     request.setStatus(ParticipationRequestStatus.CONFIRMED);
-                    ParticipationRequestDto requestDto = RequestMapper.toRequestDto(requestRepository.save(request));
+                    EventRequestStatusUpdateResult.ParticipationRequestDto requestDto =
+                            RequestMapper.toRequestInnerDto(requestRepository.save(request));
                     result.getConfirmedRequests().add(requestDto);
                 } else {
-                    // Отклоняем все неподтвержденные заявки и выходим из цикла
                     request.setStatus(ParticipationRequestStatus.REJECTED);
                     ParticipationRequestDto requestDto = RequestMapper.toRequestDto(requestRepository.save(request));
                     List<ParticipationRequest> allPendingRequestsLeftUnprocessed = requestRepository.findByEventAndStatus(event, ParticipationRequestStatus.PENDING);
@@ -307,9 +307,9 @@ public class EventServiceImpl implements EventService {
                     throw new ConflictException("The participant limit has been reached");
                 }
             } else {
-                // Отклоняем заявку
                 request.setStatus(ParticipationRequestStatus.REJECTED);
-                ParticipationRequestDto requestDto = RequestMapper.toRequestDto(requestRepository.save(request));
+                EventRequestStatusUpdateResult.ParticipationRequestDto requestDto =
+                        RequestMapper.toRequestInnerDto(requestRepository.save(request));
                 result.getRejectedRequests().add(requestDto);
             }
         }

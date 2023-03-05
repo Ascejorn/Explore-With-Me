@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import ru.practicum.ewm.PaginationHelper;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Service
@@ -35,9 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserDto> findUsers(Long[] ids, Integer from, Integer size) {
+    public Collection<UserDto> findUsers(List<Long> ids, Integer from, Integer size) {
         Pageable pageable = PaginationHelper.makePageable(from, size);
-        if (ids != null && ids.length > 0) {
+        if (ids != null && ids.size() > 0) {
             return UserMapper.toUserDto(userRepository.findByIdIn(ids, pageable));
         } else {
             return UserMapper.toUserDto(userRepository.findAll(pageable).getContent());

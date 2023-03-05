@@ -16,7 +16,16 @@ public class CompilationMapper {
         compilationDto.setId(compilation.getId());
         compilationDto.setPinned(compilation.getPinned());
         compilationDto.setTitle(compilation.getTitle());
-        compilationDto.setEvents(EventMapper.toEventShortDto(compilation.getEvents(), eventViews));
+        compilationDto.setEvents(EventMapper.toEventShortInnerDto(compilation.getEvents(), eventViews));
+        return compilationDto;
+    }
+
+    public static CompilationDto toCompilationInnerDto(Compilation compilation, Map<Long, Long> eventViews) {
+        CompilationDto compilationDto = new CompilationDto();
+        compilationDto.setId(compilation.getId());
+        compilationDto.setPinned(compilation.getPinned());
+        compilationDto.setTitle(compilation.getTitle());
+        compilationDto.setEvents(EventMapper.toEventShortInnerDto(compilation.getEvents(), eventViews));
         return compilationDto;
     }
 
