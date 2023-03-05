@@ -68,8 +68,8 @@ public class EventMapper {
         return eventDto;
     }
 
-    public static CompilationDto.EventShortDto toEventShortInnerDto(Event event, Long views) {
-        CompilationDto.EventShortDto eventDto = new CompilationDto.EventShortDto();
+    public static CompilationDto.EventInnerShortDto toEventShortInnerDto(Event event, Long views) {
+        CompilationDto.EventInnerShortDto eventDto = new CompilationDto.EventInnerShortDto();
         eventDto.setId(event.getId());
         eventDto.setAnnotation(event.getAnnotation());
         eventDto.setCategory(CategoryMapper.toCategoryShortInnerDto(event.getCategory()));
@@ -98,7 +98,7 @@ public class EventMapper {
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public static Collection<CompilationDto.EventShortDto> toEventShortInnerDto(Collection<Event> events, Map<Long, Long> views) {
+    public static Collection<CompilationDto.EventInnerShortDto> toEventShortInnerDto(Collection<Event> events, Map<Long, Long> views) {
         return events.stream()
                 .map(event -> EventMapper.toEventShortInnerDto(event, views.get(event.getId())))
                 .collect(Collectors.toUnmodifiableList());

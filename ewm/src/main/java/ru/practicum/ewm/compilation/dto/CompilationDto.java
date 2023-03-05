@@ -3,6 +3,7 @@ package ru.practicum.ewm.compilation.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import ru.practicum.ewm.event.dto.EventShortDto;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -12,22 +13,22 @@ import java.util.Collection;
 public class CompilationDto {
 
     private Long id;
-    private Collection<CompilationDto.EventShortDto> events;
+    private Collection<CompilationDto.EventInnerShortDto> events;
     private Boolean pinned;
     private String title;
 
     @Setter
     @Getter
-    public static class EventShortDto {
+    public static class EventInnerShortDto {
 
         private Long id;
         private String annotation;
-        private ru.practicum.ewm.event.dto.EventShortDto.CategoryDto category;
+        private EventShortDto.CategoryDto category;
         private Long confirmedRequests;
 
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime eventDate;
-        private ru.practicum.ewm.event.dto.EventShortDto.UserShortDto initiator;
+        private EventShortDto.UserShortDto initiator;
         private Boolean paid;
         private String title;
         private Long views;
