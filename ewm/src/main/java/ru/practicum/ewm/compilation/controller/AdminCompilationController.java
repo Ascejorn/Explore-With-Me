@@ -8,7 +8,6 @@ import ru.practicum.ewm.compilation.dto.CompilationDto;
 import ru.practicum.ewm.compilation.dto.NewCompilationDto;
 import ru.practicum.ewm.compilation.service.CompilationService;
 import ru.practicum.ewm.util.ControllerLog;
-import ru.practicum.stats.client.StatsClient;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,8 +21,6 @@ public class AdminCompilationController {
 
     private final CompilationService compilationService;
 
-    private final StatsClient statsClient;
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public Collection<CompilationDto> findCompilations(
@@ -31,7 +28,6 @@ public class AdminCompilationController {
             @RequestParam(required = false) Boolean pinned,
             @RequestParam(required = false, defaultValue = "0") Integer from,
             @RequestParam(required = false, defaultValue = "10") Integer size) {
-        statsClient.hit(request);
         log.info("{}", ControllerLog.createUrlInfo(request));
         return compilationService.findCompilations(pinned, from, size);
     }

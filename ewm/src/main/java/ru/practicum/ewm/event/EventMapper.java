@@ -1,5 +1,6 @@
 package ru.practicum.ewm.event;
 
+import org.mapstruct.factory.Mappers;
 import ru.practicum.ewm.category.Category;
 import ru.practicum.ewm.category.CategoryMapper;
 import ru.practicum.ewm.compilation.dto.CompilationDto;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class EventMapper {
+
+    private static final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     public static Event toEvent(User initiator, Category category, NewEventDto eventDto) {
         Event event = new Event();
@@ -37,7 +40,7 @@ public class EventMapper {
         EventFullDto eventDto = new EventFullDto();
         eventDto.setId(event.getId());
         eventDto.setAnnotation(event.getAnnotation());
-        eventDto.setCategory(CategoryMapper.toCategoryInnerDto(event.getCategory()));
+        eventDto.setCategory(categoryMapper.toCategoryInnerDto(event.getCategory()));
         eventDto.setConfirmedRequests(Long.valueOf(event.getConfirmedRequests().size()));
         eventDto.setCreatedOn(event.getCreatedOn());
         eventDto.setDescription(event.getDescription());
@@ -58,7 +61,7 @@ public class EventMapper {
         EventShortDto eventDto = new EventShortDto();
         eventDto.setId(event.getId());
         eventDto.setAnnotation(event.getAnnotation());
-        eventDto.setCategory(CategoryMapper.toCategoryShortInnerDto(event.getCategory()));
+        eventDto.setCategory(categoryMapper.toCategoryShortInnerDto(event.getCategory()));
         eventDto.setConfirmedRequests(Long.valueOf(event.getConfirmedRequests().size()));
         eventDto.setEventDate(event.getEventDate());
         eventDto.setInitiator(UserMapper.toUserEventShortInnerDto(event.getInitiator()));
@@ -72,7 +75,7 @@ public class EventMapper {
         CompilationDto.EventInnerShortDto eventDto = new CompilationDto.EventInnerShortDto();
         eventDto.setId(event.getId());
         eventDto.setAnnotation(event.getAnnotation());
-        eventDto.setCategory(CategoryMapper.toCategoryShortInnerDto(event.getCategory()));
+        eventDto.setCategory(categoryMapper.toCategoryShortInnerDto(event.getCategory()));
         eventDto.setConfirmedRequests(Long.valueOf(event.getConfirmedRequests().size()));
         eventDto.setEventDate(event.getEventDate());
         eventDto.setInitiator(UserMapper.toUserEventShortInnerDto(event.getInitiator()));
