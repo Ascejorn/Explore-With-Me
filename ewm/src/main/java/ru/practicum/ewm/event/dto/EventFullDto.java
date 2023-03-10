@@ -3,10 +3,12 @@ package ru.practicum.ewm.event.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import ru.practicum.ewm.comment.dto.CommentShortDto;
 import ru.practicum.ewm.event.Location;
 import ru.practicum.ewm.event.enums.EventState;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Setter
 @Getter
@@ -34,6 +36,7 @@ public class EventFullDto {
     private EventState state;
     private String title;
     private Long views;
+    private Collection<CommentInnerDto> comments;
 
     @Setter
     @Getter
@@ -51,5 +54,19 @@ public class EventFullDto {
         private Long id;
 
         private String name;
+    }
+
+    @Setter
+    @Getter
+    public static class CommentInnerDto {
+
+        private Long id;
+
+        private String text;
+
+        private CommentShortDto.UserDto author;
+
+        @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime createdOn;
     }
 }
