@@ -25,7 +25,7 @@ public class Comment {
     @JoinColumn(name = "author_id")
     private User author;
 
-    @Column(nullable = false, name = "text", length = 255)
+    @Column(nullable = false, name = "text", length = 2000)
     private String text;
 
     @CreationTimestamp

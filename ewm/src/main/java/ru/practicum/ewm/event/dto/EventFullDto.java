@@ -64,9 +64,20 @@ public class EventFullDto {
 
         private String text;
 
-        private CommentShortDto.UserDto author;
+        private CommentInnerDto.UserDto author;
 
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         private LocalDateTime createdOn;
+
+        @Setter
+        @Getter
+        public static class UserDto {
+
+            private Long id;
+
+            private String name;
+
+            private String email;
+        }
     }
 }

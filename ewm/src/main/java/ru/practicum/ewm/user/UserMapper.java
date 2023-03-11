@@ -29,8 +29,8 @@ public class UserMapper {
         return userDto;
     }
 
-    public static CommentShortDto.UserDto toCommentShortUserInnerDto(User user) {
-        CommentShortDto.UserDto userDto = new CommentShortDto.UserDto();
+    public static EventFullDto.CommentInnerDto.UserDto toCommentShortUserInnerDto(User user) {
+        EventFullDto.CommentInnerDto.UserDto userDto = new EventFullDto.CommentInnerDto.UserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setEmail(user.getEmail());

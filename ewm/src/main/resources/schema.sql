@@ -45,7 +45,7 @@ CREATE TABLE if NOT EXISTS public.compilation_event (
 );
 CREATE TABLE if NOT EXISTS public.comments (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    text VARCHAR(255) NOT NULL,
+    text VARCHAR(2000) NOT NULL,
     author_id BIGINT NOT NULL,
     event_id BIGINT NOT NULL,
     created_on timestamp without time zone NOT NULL
