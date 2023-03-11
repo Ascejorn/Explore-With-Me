@@ -1,7 +1,6 @@
 package ru.practicum.ewm.user;
 
 import ru.practicum.ewm.comment.dto.CommentFullDto;
-import ru.practicum.ewm.comment.dto.CommentShortDto;
 import ru.practicum.ewm.event.dto.EventFullDto;
 import ru.practicum.ewm.event.dto.EventShortDto;
 import ru.practicum.ewm.user.dto.NewUserRequest;
