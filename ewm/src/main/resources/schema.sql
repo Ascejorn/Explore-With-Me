@@ -1,4 +1,4 @@
-DROP TABLE if EXISTS users, categories, events, requests, compilations, compilation_event;
+DROP TABLE if EXISTS users, categories, events, requests, compilations, compilation_event, comments;
 CREATE TABLE if NOT EXISTS public.users (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -42,4 +42,11 @@ CREATE TABLE if NOT EXISTS public.compilation_event (
     compilation_id BIGINT NOT NULL,
     event_id BIGINT NOT NULL,
     CONSTRAINT compilation_event_pk PRIMARY KEY (compilation_id, event_id)
+);
+CREATE TABLE if NOT EXISTS public.comments (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    text VARCHAR(2000) NOT NULL,
+    author_id BIGINT NOT NULL,
+    event_id BIGINT NOT NULL,
+    created_on timestamp without time zone NOT NULL
 );
